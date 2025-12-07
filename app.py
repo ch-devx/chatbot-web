@@ -16,13 +16,15 @@ def show_response():
     if request.method == "POST":
         user_input = request.form.get("user_input")
         response = make_call(user_input)
-        return redirect(url_for("index", user_input=user_input, response=response))
+        return render_template(
+            "response.html", user_input=user_input, response=response
+        )
 
 
 def make_call(user_input):
     client = genai.Client()
     response = client.models.generate_content(
-        model="gemini-2.5-flash", contents=user_input
+        model="gemini-2.5-flash-lite", contents=user_input
     )
     return response.text
 

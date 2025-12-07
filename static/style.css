@@ -6,26 +6,49 @@
 
 body{
     background-color: #120f19;
+    font-family: sans-serif;
+    height: 100vh;
 }
 
 .container{
     display: flex;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 form{
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 textarea{
-    width: 50vw;
-    height: 30vh;
+    flex: 2;
+    padding: 20px;
     resize: none;
+    margin: 30px;
+    width: 94%;
+    font-size: 18px;
+    background-color: #322f3977;
+    border-radius: 12px;
+}
+
+.user_input{
+    padding: 14px;
+    border-radius: 6px;
+    width: 50vw;
+    background-color: #322f39;
+    font-size: 17px;
+}
+
+.user_input, textarea{
+    border: none;
+    outline: none;
+    color: #fff;
 }
