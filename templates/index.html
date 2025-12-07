@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for(endpoint='static', filename='style.css')}}">
+    <title>Chatbot Web</title>
+</head>
+<body>
+    <div class="container">
+        <form action="/response" method="post">
+            <input type="text" placeholder="Ask a question" name="user_input">
+            <input type="submit">
+        </form>
+        <textarea name="response" id="response" readonly>{{ response }}</textarea>
+    </div>
+</body>
+</html>
