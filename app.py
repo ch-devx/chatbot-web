@@ -22,11 +22,14 @@ def show_response():
 
 
 def make_call(user_input):
-    client = genai.Client()
-    response = client.models.generate_content(
-        model="gemini-2.5-flash-lite", contents=user_input
-    )
-    return response.text
+    try:
+        client = genai.Client()
+        response = client.models.generate_content(
+            model="gemini-2.5-flash-lite", contents=user_input
+        )
+        return response.text
+    except Exception as e:
+        return f"Error al contactar la API: {e}"
 
 
 if __name__ == "__main__":
