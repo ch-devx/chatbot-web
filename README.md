@@ -33,7 +33,7 @@ Use cases:
 
 ## Getting Started (local)
 
-Open a PowerShell terminal in the project root (`C:\carlos\python\projects\chatbot_web`) and follow these steps.
+Open a terminal in the project root and follow these steps.
 
 Create and activate a virtual environment:
 
@@ -51,6 +51,13 @@ pip install -r requirements.txt
 # Otherwise, at minimum install Flask
 pip install Flask
 ```
+
+Set up environment variables:
+
+Create a `.env` file in the project root with your Gemini API key:
+GEMINI_API_KEY=your_api_key_here
+
+The app reads this key automatically via `genai.Client()`. You can get a key from [Google AI Studio](https://aistudio.google.com/app/apikey).
 
 Run the application:
 
@@ -105,13 +112,7 @@ Testing locally
 
 ## Contributing
 
-Contributions are welcome. For small learning projects, prefer focused pull requests that:
-- Add a single feature or fix a bug.
-- Include brief README updates if behavior or commands change.
-
-Suggested workflow:
-- Fork the repository and create a feature branch.
-- Open a pull request describing the change.
+This is a personal learning project. Feel free to fork it and adapt it to your own use case. Pull requests with improvements or bug fixes are welcome.
 
 ## Troubleshooting
 
