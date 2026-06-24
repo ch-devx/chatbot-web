@@ -13,12 +13,15 @@ def index():
 
 @app.route("/response", methods=["POST"])
 def show_response():
-    if request.method == "POST":
-        user_input = request.form.get("user_input")
-        response = make_call(user_input)
-        return render_template(
-            "response.html", user_input=user_input, response=response
-        )
+    user_input = request.form.get("user_input")
+    if not user_input:
+        return redirect(url_for("index"))
+    response = make_call(user_input)
+    history = session.get("history", [])
+    history.append({"role": "user", "text": user_input})
+    history.append({"role": "assistant", "text": response})
+    session["history"] = history
+    return redirect(url_for("index"))
 
 
 def make_call(user_input):
