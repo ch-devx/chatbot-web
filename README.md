@@ -37,9 +37,14 @@ Open a terminal in the project root and follow these steps.
 
 Create and activate a virtual environment:
 
-```powershell
+```bash
+# Windows (PowerShell)
 python -m venv .venv
 & .venv\Scripts\Activate.ps1
+
+# macOS / Linux
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
 Install dependencies. If a `requirements.txt` exists, use it; otherwise install Flask directly:
