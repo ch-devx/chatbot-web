@@ -23,6 +23,10 @@ def show_response():
     session["history"] = history
     return redirect(url_for("index"))
 
+@app.route("/reset", methods=["GET"])
+def reset():
+    session.pop("history", None)
+    return redirect(url_for("index"))
 
 def make_call(user_input):
     try:
