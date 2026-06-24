@@ -47,15 +47,9 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-Install dependencies. If a `requirements.txt` exists, use it; otherwise install Flask directly:
+Install dependencies from `requirements.txt`:
 
-```powershell
-# If requirements.txt exists
 pip install -r requirements.txt
-
-# Otherwise, at minimum install Flask
-pip install Flask
-```
 
 Set up environment variables:
 
