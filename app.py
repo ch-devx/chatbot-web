@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from google import genai
 
 app = Flask(__name__)
+app.secret_key = "dev-secret-key-change-in-production"
 
 
 @app.route("/", methods=["GET"])
