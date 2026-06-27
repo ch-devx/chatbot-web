@@ -8,7 +8,7 @@ import os
 import logging
 
 app = Flask(__name__)
-app.secret_key = os.getenv("GROQ_API_KEY", "fallback-only-for-dev")
+app.secret_key = os.getenv("SECRET_KEY", "dev-only-fallback")
 
 
 @app.route("/", methods=["GET"])
