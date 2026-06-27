@@ -2,7 +2,8 @@
 
 A web-based conversational chatbot built with Python and Flask, powered by Groq (Llama 3.1 8B Instant). Features persistent chat history within the session, a clean dark UI, and a minimal codebase designed for clarity and easy extension.
 
-**[Live demo →](https://ch-devx-chatbot-web.hf.space/)**
+=======
+**[Live demo](https://ch-devx-chatbot-web.hf.space/)**
 
 ![Demo](/.github/assets/demo.png)
 
