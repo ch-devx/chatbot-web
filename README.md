@@ -92,18 +92,6 @@ Open your browser at `http://127.0.0.1:5000`.
 
 ---
 
-## Extension points
-
-This project is intentionally minimal. Some natural next steps:
-
-- **Persistent history** — swap Flask session for a SQLite database to keep conversations across sessions.
-- **Streaming responses** — use Gemini's streaming API and Server-Sent Events for real-time output.
-- **System prompt** — add a configurable system prompt to give the assistant a persona or task scope.
-- **Multiple models** — expose a model selector in the UI to switch between Gemini variants.
-- **AJAX input** — replace the form POST with a `fetch()` call to avoid full page reloads.
-
----
-
 ## Troubleshooting
 
 | Problem | Solution |
@@ -111,9 +99,3 @@ This project is intentionally minimal. Some natural next steps:
 | `ModuleNotFoundError: Flask` | Make sure your virtual environment is activated before running. |
 | `API key not found` | Confirm your `.env` file exists in the project root with the correct key name. |
 | Port already in use | Run with `flask run --port=5001` or stop the process using port 5000. |
-
----
-
-## License
-
-This project is provided for learning and portfolio purposes. Add a proper license file before using it in a production context.
