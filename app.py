@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from groq import Groq
 
 import os
+import logging
 
 app = Flask(__name__)
 app.secret_key = os.getenv("GROQ_API_KEY", "fallback-only-for-dev")
@@ -44,8 +45,10 @@ def make_call(user_input, history=[]):
             max_completion_tokens=1024,
         )
         return response.choices[0].message.content
-    except Exception:
-        return "The assistant is temporarily unavailable. Please try again in a moment."    
+    except Exception as e:
+            error_message = getattr(e, "message", None) or str(e)
+            logging.error("Groq API error: %s", error_message)
+            return "The assistant is temporarily unavailable. Please try again in a moment."
 
 
 if __name__ == "__main__":
