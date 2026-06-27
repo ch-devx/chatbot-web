@@ -4,11 +4,14 @@ load_dotenv()
 from flask import Flask, render_template, request, redirect, url_for, session
 from groq import Groq
 
+from werkzeug.middleware.proxy_fix import ProxyFix
+
 import os
 import logging
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "dev-only-fallback")
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 
 @app.route("/", methods=["GET"])
