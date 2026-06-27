@@ -2,6 +2,7 @@
 {% block content %}
 
 <div class="chat-wrapper" id="chatWrapper" data-has-history="{{ 'true' if history else 'false' }}">
+
     <div class="chat-window" id="chatWindow">
         {% for message in history %}
             <div class="message {{ message.role }}">
@@ -29,12 +30,6 @@
     const chatWindow = document.getElementById('chatWindow');
     const hasHistory = wrapper.dataset.hasHistory === 'true';
 
-    function activateChat() {
-        wrapper.classList.add('has-chat');
-        hint.style.opacity = '0';
-        hint.style.pointerEvents = 'none';
-    }
-
     if (hasHistory) {
         wrapper.classList.add('has-chat', 'no-transition');
         hint.style.display = 'none';
@@ -42,9 +37,7 @@
     }
 
     document.getElementById('inputForm').addEventListener('submit', function() {
-        if (!wrapper.classList.contains('has-chat')) {
-            activateChat();
-        }
+        wrapper.classList.add('has-chat');
     });
 </script>
 
