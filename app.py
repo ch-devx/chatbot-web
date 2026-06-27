@@ -37,7 +37,7 @@ def make_call(user_input):
     try:
         client = genai.Client()
         response = client.models.generate_content(
-            model="gemini-2.5-flash-lite", contents=user_input
+            model="gemini-1.5-flash", contents=user_input
         )
         return response.text
     except Exception as e:
