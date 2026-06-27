@@ -1,22 +1,51 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="chat-window">
-    {% for message in history %}
-        <div class="message {{ message.role }}">
-            <span class="label">{{ "You" if message.role == "user" else "Assistant" }}</span>
-            <p>{{ message.text }}</p>
+<div class="chat-wrapper" id="chatWrapper" data-has-history="{{ 'true' if history else 'false' }}">
+    <div class="chat-window" id="chatWindow">
+        {% for message in history %}
+            <div class="message {{ message.role }}">
+                <span class="label">{{ "You" if message.role == "user" else "Assistant" }}</span>
+                <p>{{ message.text }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="input-area" id="inputArea">
+        <div class="input-hint" id="inputHint">What can I help you with?</div>
+        <form action="/response" method="post" class="input-form" id="inputForm">
+            <input type="text" placeholder="Type your message…" name="user_input" class="user_input" id="userInput" autocomplete="off" autofocus>
+            <button type="submit">Send</button>
+        </form>
+        <div class="footer-row">
+            <a href="/reset" class="reset-btn">New chat</a>
         </div>
-    {% endfor %}
+    </div>
 </div>
 
-<form action="/response" method="post" class="input-form">
-    <input type="text" placeholder="Type your message…" name="user_input" class="user_input" autocomplete="off" autofocus>
-    <button type="submit">Send</button>
-</form>
+<script>
+    const wrapper = document.getElementById('chatWrapper');
+    const hint = document.getElementById('inputHint');
+    const chatWindow = document.getElementById('chatWindow');
+    const hasHistory = wrapper.dataset.hasHistory === 'true';
 
-<div class="footer-row">
-    <a href="/reset" class="reset-btn">New chat</a>
-</div>
+    function activateChat() {
+        wrapper.classList.add('has-chat');
+        hint.style.opacity = '0';
+        hint.style.pointerEvents = 'none';
+    }
+
+    if (hasHistory) {
+        wrapper.classList.add('has-chat', 'no-transition');
+        hint.style.display = 'none';
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    document.getElementById('inputForm').addEventListener('submit', function() {
+        if (!wrapper.classList.contains('has-chat')) {
+            activateChat();
+        }
+    });
+</script>
 
 {% endblock %}
