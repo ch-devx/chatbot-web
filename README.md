@@ -1,129 +1,119 @@
-# Chatbot Web
+# chatbot-web
 
-A small learning project that demonstrates a simple web-based chatbot built with Python and Flask. This repository contains a minimal Flask app that renders a web UI and returns responses from a lightweight chat handler — suitable for learning, experimentation, and local development.
-
-**Supported:** basic conversation flow via a web form and simple templating with Jinja2.
+A web-based conversational chatbot built with Python and Flask, powered by Google Gemini. Features a persistent chat history within the session, a clean dark UI, and a minimal codebase designed for clarity and easy extension.
 
 ---
 
-**Contents**
-- **Overview:** quick description of purpose and scope.
-- **Getting Started:** how to set up a local environment and run the app.
-- **Project Structure:** files and directories in this repo.
-- **Usage:** how to interact with the application.
-- **Development:** notes for contributors and extension points.
-- **Troubleshooting & FAQ**
-- **License & Contact**
+## Tech stack
+
+- **Backend:** Python 3.8+, Flask
+- **AI:** Google Gemini 2.5 Flash Lite via `google-genai`
+- **Frontend:** Jinja2 templates, vanilla CSS
+- **Session management:** Flask server-side sessions
 
 ---
 
-## Overview
+## Project structure
 
-`chatbot_web` is a compact learning project that shows how to wire a Flask backend to a simple HTML frontend for conversational interactions. It focuses on clarity and minimal dependencies so you can explore and extend the code easily.
+```
+chatbot-web/
+├── app.py               # Flask app — routes and Gemini API call
+├── templates/
+│   ├── base.html        # Base layout with shared head and container
+│   └── index.html       # Chat UI — message history and input form
+├── static/
+│   └── style.css        # Dark theme, chat bubble styles
+├── requirements.txt
+└── .gitignore
+```
 
-Use cases:
-- Learn Flask app structure and templating.
-- Prototype simple chat logic or plug in an external NLP/chat service.
-- Demonstrate form handling and rendering responses with Jinja2 templates.
+---
 
-## Prerequisites
+## Getting started
 
-- Python 3.8 or later installed.
-- Basic familiarity with Python and the command line (PowerShell on Windows).
+### Prerequisites
 
-## Getting Started (local)
+- Python 3.8 or later
+- A Gemini API key — get one at [Google AI Studio](https://aistudio.google.com/app/apikey)
 
-Open a terminal in the project root and follow these steps.
+### Installation
 
-Create and activate a virtual environment:
+**1. Clone the repository**
 
 ```bash
-# Windows (PowerShell)
-python -m venv .venv
-& .venv\Scripts\Activate.ps1
+git clone https://github.com/ch-devx/chatbot-web.git
+cd chatbot-web
+```
 
+**2. Create and activate a virtual environment**
+
+```bash
 # macOS / Linux
 python3 -m venv .venv
 source .venv/bin/activate
+
+# Windows (PowerShell)
+python -m venv .venv
+& .venv\Scripts\Activate.ps1
 ```
 
-Install dependencies from `requirements.txt`:
+**3. Install dependencies**
 
+```bash
 pip install -r requirements.txt
+```
 
-Set up environment variables:
+**4. Configure your API key**
 
-Create a `.env` file in the project root with your Gemini API key:
+Create a `.env` file in the project root:
+
+```
 GEMINI_API_KEY=your_api_key_here
+```
 
-The app reads this key automatically via `genai.Client()`. You can get a key from [Google AI Studio](https://aistudio.google.com/app/apikey).
+> The `.env` file is listed in `.gitignore` and will never be committed.
 
-Run the application:
+**5. Run the app**
 
-```powershell
-# Typical options (choose one):
-# 1) Run with flask if the app exposes FLASK_APP
-$env:FLASK_APP = "app.py"
-flask run --host=0.0.0.0 --port=5000
-
-# 2) Or run directly with Python if app.py contains the app.run block
+```bash
 python app.py
 ```
 
-Open a browser at `http://127.0.0.1:5000` to view the application.
+Open your browser at `http://127.0.0.1:5000`.
 
-## Project Structure
+---
 
-```
-app.py
-static/
-    style.css
-templates/
-    index.html
-    response.html
-README.md
-```
+## How it works
 
-- `app.py` — main Flask application entrypoint and routing.
-- `templates/` — Jinja2 templates used to render the web UI.
-- `static/` — static assets (CSS, images, JS if added).
+1. The user submits a message through the input form.
+2. Flask stores the message in the server-side session and calls the Gemini API.
+3. The response is appended to the session history and the page re-renders with the full conversation.
+4. Clicking **New chat** clears the session and resets the conversation.
 
-## How it Works
+---
 
-- The front page (`index.html`) provides a simple form to submit user messages.
-- The message is sent to an endpoint in `app.py` which processes the input and returns a response.
-- `response.html` is used to render the chatbot reply or to inject it into the page depending on implementation.
+## Extension points
 
-This project intentionally keeps the chat logic simple so you can replace or extend it. Example extension points:
-- Replace the built-in responder with an external API (OpenAI, local NLP model).
-- Add message history and persistent sessions.
-- Support AJAX calls for real-time UI updates.
+This project is intentionally minimal. Some natural next steps:
 
-## Development Notes
+- **Persistent history** — swap Flask session for a SQLite database to keep conversations across sessions.
+- **Streaming responses** — use Gemini's streaming API and Server-Sent Events for real-time output.
+- **System prompt** — add a configurable system prompt to give the assistant a persona or task scope.
+- **Multiple models** — expose a model selector in the UI to switch between Gemini variants.
+- **AJAX input** — replace the form POST with a `fetch()` call to avoid full page reloads.
 
-- Use the virtual environment to isolate dependencies.
-- Keep templates small and focused; add modular templates if the UI grows.
-- If adding JavaScript for client-side behavior, place files under `static/` and reference them from templates.
-
-Testing locally
-- Manual: submit messages through the UI and observe responses.
-- Automated testing: add unit tests for chat logic separate from Flask routes.
-
-## Contributing
-
-This is a personal learning project. Feel free to fork it and adapt it to your own use case. Pull requests with improvements or bug fixes are welcome.
+---
 
 ## Troubleshooting
 
-- "ModuleNotFoundError: Flask": Ensure your virtual environment is activated and `pip install Flask` was run in that environment.
-- Port already in use: change the `--port` option when running `flask run` or stop the process that uses the port.
+| Problem | Solution |
+|---|---|
+| `ModuleNotFoundError: Flask` | Make sure your virtual environment is activated before running. |
+| `API key not found` | Confirm your `.env` file exists in the project root with the correct key name. |
+| Port already in use | Run with `flask run --port=5001` or stop the process using port 5000. |
 
-If an error originates in `app.py`, inspect the traceback in the terminal and check the route handlers for typos or missing imports.
+---
 
 ## License
 
-This repository is provided for learning and experimentation. Add a proper license file if you intend to reuse or redistribute code for production use.
-
-## Contact
-
-For questions about this project, open an issue in the repository or make a pull request with suggested improvements.
+This project is provided for learning and portfolio purposes. Add a proper license file before using it in a production context.
