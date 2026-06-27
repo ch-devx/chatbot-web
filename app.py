@@ -7,7 +7,7 @@ from groq import Groq
 import os
 
 app = Flask(__name__)
-app.secret_key = os.getenv("GEMINI_API_KEY", "fallback-only-for-dev")
+app.secret_key = os.getenv("GROQ_API_KEY", "fallback-only-for-dev")
 
 
 @app.route("/", methods=["GET"])
