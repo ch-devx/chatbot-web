@@ -21,8 +21,8 @@ def show_response():
     user_input = request.form.get("user_input")
     if not user_input:
         return redirect(url_for("index"))
-    response = make_call(user_input)
     history = session.get("history", [])
+    response = make_call(user_input, history)
     history.append({"role": "user", "text": user_input})
     history.append({"role": "assistant", "text": response})
     session["history"] = history
