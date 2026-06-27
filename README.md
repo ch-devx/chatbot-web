@@ -7,7 +7,7 @@ A web-based conversational chatbot built with Python and Flask, powered by Googl
 ## Tech stack
 
 - **Backend:** Python 3.8+, Flask
-- **AI:** Google Gemini 1.5 Flash via `google-genai`
+- **AI:** Groq Llama 3.1 8B Instant
 - **Frontend:** Jinja2 templates, vanilla CSS
 - **Session management:** Flask server-side sessions
 

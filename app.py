@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from flask import Flask, render_template, request, redirect, url_for, session
-from google import genai
+from groq import Groq
 
 import os
 
@@ -35,13 +35,15 @@ def reset():
 
 def make_call(user_input):
     try:
-        client = genai.Client()
-        response = client.models.generate_content(
-            model="gemini-1.5-flash", contents=user_input
+        client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+        response = client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=[{"role": "user", "content": user_input}],
+            max_completion_tokens=1024,
         )
-        return response.text
-    except Exception as e:
-        return f"Error al contactar la API: {e}"
+        return response.choices[0].message.content
+    except Exception:
+        return "The assistant is temporarily unavailable. Please try again in a moment."    
 
 
 if __name__ == "__main__":
