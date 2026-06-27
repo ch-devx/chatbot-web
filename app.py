@@ -33,12 +33,14 @@ def reset():
     session.pop("history", None)
     return redirect(url_for("index"))
 
-def make_call(user_input):
+def make_call(user_input, history=[]):
     try:
         client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+        messages = [{"role": m["role"], "content": m["text"]} for m in history]
+        messages.append({"role": "user", "content": user_input})
         response = client.chat.completions.create(
             model="llama-3.1-8b-instant",
-            messages=[{"role": "user", "content": user_input}],
+            messages=messages,
             max_completion_tokens=1024,
         )
         return response.choices[0].message.content
