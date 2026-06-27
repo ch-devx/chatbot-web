@@ -4,8 +4,10 @@ load_dotenv()
 from flask import Flask, render_template, request, redirect, url_for, session
 from google import genai
 
+import os
+
 app = Flask(__name__)
-app.secret_key = "dev-secret-key-change-in-production"
+app.secret_key = os.getenv("GEMINI_API_KEY", "fallback-only-for-dev")
 
 
 @app.route("/", methods=["GET"])
