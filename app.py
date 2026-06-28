@@ -54,9 +54,9 @@ def make_call(user_input, history=[]):
         )
         return response.choices[0].message.content
     except Exception as e:
-            error_message = getattr(e, "message", None) or str(e)
-            logging.error("Groq API error: %s", error_message)
-            return "The assistant is temporarily unavailable. Please try again in a moment."
+        error_message = getattr(e, "message", None) or str(e)
+        logging.error("Groq API error: %s", error_message)
+        return "The assistant is temporarily unavailable. Please try again in a moment."
 
 
 if __name__ == "__main__":
