@@ -1,0 +1,15 @@
+name: Keep alive
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping HF Space
+        run: |
+          curl -sf -o /dev/null https://ch-devx-chatbot-web.hf.space/ \
+            || echo "Space unreachable — may be rebuilding"
