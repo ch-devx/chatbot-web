@@ -13,14 +13,12 @@ A web-based conversational chatbot built with Python and Flask, powered by Groq 
 - **Backend:** Python 3.11, Flask, Gunicorn
 - **AI:** Groq — Llama 3.1 8B Instant
 - **Frontend:** Jinja2 templates, vanilla CSS
-- **Session management:** Flask server-side sessions (signed cookies, no database)
+- **Session management:** Flask signed cookies (client-side, no database)
 - **Hosting:** Hugging Face Spaces (Docker, CPU-Basic)
 
 ---
 
 ## Project structure
-
-```
 chatbot-web/
 ├── app.py               # Flask app — routes and Groq API call
 ├── templates/
@@ -31,7 +29,6 @@ chatbot-web/
 ├── Dockerfile           # Container config for Hugging Face Spaces
 ├── requirements.txt
 └── .gitignore
-```
 
 ---
 
@@ -69,16 +66,14 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-**4. Configure your environment variables**
+**4. Configure environment variables**
 
 Create a `.env` file in the project root:
 
-```
 GROQ_API_KEY=your_groq_api_key_here
 SECRET_KEY=a_random_secret_string_for_flask_sessions
-```
 
-> The .env file is listed in .gitignore and will never be committed.
+> The `.env` file is listed in `.gitignore` and will never be committed.
 
 **5. Run the app**
 
@@ -93,8 +88,8 @@ Open your browser at `http://127.0.0.1:5000`.
 ## How it works
 
 1. The user submits a message through the input form.
-2. Flask stores the message in the server-side session and calls the Groq API (Llama 3.1 8B Instant).
-3. The response is appended to the session history and the page re-renders with the full conversation.
+2. Flask appends the message to the session history and calls the Groq API (Llama 3.1 8B Instant).
+3. The response is added to the session history and the page re-renders with the full conversation.
 4. Clicking **New chat** clears the session and resets the conversation.
 
 ---
@@ -118,3 +113,9 @@ To deploy your own instance:
 | `ModuleNotFoundError: Flask` | Make sure your virtual environment is activated before running. |
 | `API key not found` | Confirm your `.env` file exists in the project root with the correct key names. |
 | Port already in use | Run with `flask run --port=5001` or stop the process using port 5000. |
+
+---
+
+## License
+
+MIT
