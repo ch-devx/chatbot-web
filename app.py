@@ -18,6 +18,7 @@ app.config.update(
 )
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 @app.route("/", methods=["GET"])
 def index():
@@ -42,9 +43,8 @@ def reset():
     session.pop("history", None)
     return redirect(url_for("index"))
 
-def make_call(user_input, history=[]):
+def make_call(user_input, history=None):
     try:
-        client = Groq(api_key=os.getenv("GROQ_API_KEY"))
         messages = [{"role": m["role"], "content": m["text"]} for m in history]
         messages.append({"role": "user", "content": user_input})
         response = client.chat.completions.create(
