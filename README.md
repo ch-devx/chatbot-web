@@ -19,16 +19,26 @@ A web-based conversational chatbot built with Python and Flask, powered by Groq 
 ---
 
 ## Project structure
+
+```
 chatbot-web/
-├── app.py               # Flask app — routes and Groq API call
-├── templates/
-│   ├── base.html        # Base layout with shared head and container
-│   └── index.html       # Chat UI — message history and input form
+├── .github/
+│   ├── assets/
+│   │   └── demo.png
+│   └── workflows/
+│       └── keep-alive.yml
 ├── static/
-│   └── style.css        # Dark theme, chat bubble styles
-├── Dockerfile           # Container config for Hugging Face Spaces
-├── requirements.txt
-└── .gitignore
+│   └── style.css
+├── templates/
+│   ├── base.html
+│   └── index.html
+├── .gitignore
+├── Dockerfile
+├── LICENSE
+├── README.md
+├── app.py
+└── requirements.txt
+```
 
 ---
 
